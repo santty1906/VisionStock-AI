@@ -1,102 +1,104 @@
-# 👁️ Visión Artificial para Reconocimiento de Objetos Cotidianos
+# 👁️ Everyday Object Recognition Vision System (VisionStock-AI)
 
-## 📌 Descripción del proyecto
-Visión Artificial para Reconocimiento de Objetos Cotidianos es un sistema de visión artificial en tiempo real orientado a la automatización del inventario, especialmente diseñado para empresas de almacenes y supermercados.
+## 📌 Project Description
+VisionStock-AI is a real-time computer vision system designed to automate inventory management processes, especially for warehouses and supermarkets.
 
-El programa permite detectar y reconocer objetos cotidianos utilizando cámaras, registrando automáticamente los productos identificados en una base de datos, reduciendo errores humanos y optimizando los procesos de control de stock.
+The system detects and recognizes everyday objects using camera input and automatically registers identified products into a database. This reduces human error and optimizes stock control operations.
 
-El proyecto está desarrollado exclusivamente en Python, utilizando tecnologías modernas de visión por computadora y aprendizaje profundo.
+The project is fully developed in Python, leveraging modern computer vision and deep learning technologies.
 
-## 🎯 Público objetivo
-Este proyecto está destinado principalmente a:
-- 🏬 Supermercados
-- 📦 Almacenes
-- 🏪 Tiendas minoristas
-- 🚚 Centros de distribución
-- Empresas interesadas en inventarios automáticos mediante visión artificial
+## 🎯 Target Audience
+This project is primarily intended for:
+- 🏬 Supermarkets
+- 📦 Warehouses
+- 🏪 Retail stores
+- 🚚 Distribution centers
+- Companies interested in automated inventory systems using computer vision
 
-## 🚀 ¿Qué hace el programa?
-- Detecta objetos en tiempo real mediante cámara
-- Reconoce productos cotidianos usando modelos de IA
-- Registra automáticamente cada detección en una base de datos
-- Permite aprender nuevos objetos sin reentrenar el modelo completo
-- Proporciona una API para consultar estadísticas y exportar inventario
-- Guarda evidencias visuales de cada detección
+## 🚀 Features
+- Real-time object detection using a camera  
+- Recognition of everyday products using AI models  
+- Automatic database registration for each detected item  
+- Incremental learning of new objects without full model retraining  
+- REST API for statistics and inventory export  
+- Storage of visual evidence for each detection 
 
-## 🧠 Tecnologías utilizadas
-- Python 3.9+
-- YOLOv8 – detección de objetos
-- CLIP – reconocimiento visual y aprendizaje incremental
-- FastAPI – API REST
-- OpenCV – captura y procesamiento de imágenes
-- SQLite – almacenamiento de inventario
+## 🧠 Technologies Used
+- Python 3.9+  
+- YOLOv8 – Object detection  
+- CLIP – Visual recognition and incremental learning  
+- FastAPI – REST API  
+- OpenCV – Image capture and processing  
+- SQLite – Inventory storage 
 
-## 👥 Integrantes del equipo
+## 👥 Team Members
 
 ### Santiago López
-Desarrollo principal, manejo de cámara y selección de modelos preentrenados. Participó en todas las etapas del proyecto.
+Lead development, camera integration, and pretrained model selection. Participated in all stages of the project.
 
 ### Enzo Dellasera
-Desarrollo completo del sistema, diseño del proyecto y gestión de bases de datos.
+Full system development, project design, and database management.
 
 ### Rubén Bernuil Bermúdez
-Apoyo en el desarrollo del código y en la estructura general del proyecto.
+Code development support and overall project structure contribution.
 
 ### Jose Batista
-Apoyo en la presentación del proyecto.
+Project presentation support.
 
-## 🧩 Arquitectura del proyecto (Python)
+## 🧩 Project Architecture (Python)
 
-### vision_service.py
-Servicio central de visión: procesa frames, detecta con YOLOv8, reconoce con CLIP y guarda los resultados en la base de datos.
+### `vision_service.py`
+Core vision service: processes frames, performs detection with YOLOv8, recognizes objects using CLIP, and stores results in the database.
 
-### main.py (FastAPI)
-Expone endpoints REST para el procesamiento de imágenes, aprendizaje de objetos y consulta del inventario.
+### `main.py`
+FastAPI application exposing REST endpoints for image processing, object learning, and inventory queries.
 
-### db.py
-Gestión de la base de datos de inventario y exportación de datos.
+### `db.py`
+Handles inventory database management and data export.
 
-### learned_db.py
-Almacena embeddings CLIP para objetos aprendidos dinámicamente.
+### `learned_db.py`
+Stores CLIP embeddings for dynamically learned objects.
 
-### recognizer.py
-Sistema de reconocimiento basado en CLIP y kNN.
+### `recognizer.py`
+Recognition system based on CLIP and k-Nearest Neighbors (kNN).
 
-### camara.py
-Script de cámara en vivo para detección e inventario automático.
+### `camara.py`
+Live camera script for automatic detection and inventory logging.
 
-### camara_learn.py
-Escaneo guiado de objetos para aprendizaje incremental.
+### `camara_learn.py`
+Guided object scanning script for incremental learning.
 
-## ⚙️ Requisitos
-- Python 3.9 o superior
-- Cámara conectada
-- GPU con CUDA (opcional, recomendada)
+## ⚙️ Requirements
+- Python 3.9 or higher  
+- Connected camera  
+- CUDA-enabled GPU (optional but recommended) 
 
-## 🛠️ Instalación rápida
+## 🛠️ Installation
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## ▶️ Ejecución
+## ▶️ Running the System
 ### API
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-## Cámara
+## Camera
 ``` 
 python camara.py
 ```
 
-## 🗄️ Bases de datos
-- inventario.db: registro de detecciones
-- learned_objects.db: objetos aprendidos
+## 🗄️ Databases
+- inventario.db: Stores detection records
+- learned_objects.db: Stores dynamically learned object embeddings
 
-## 🔮 Mejoras futuras
-- Integración de un panel visual en React (opcional)
-- Base de datos más robusta
-- Mejoras en precisión y rendimiento
-- Seguridad y autenticación en la API
+## 🔮 Future Improvements
+- Optional React-based visual dashboard integration
+- More robust database system (PostgreSQL/MySQL)
+- Accuracy and performance optimization
+- API security and authentication
+- Deployment in cloud environments
+
