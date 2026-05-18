@@ -14,6 +14,15 @@ import numpy as np
 from db import init_db, fetch_detections, counts_by_label, totals, clear_inventory
 from learned_db import init_db as init_learn_db, get_label_counts as learned_counts, get_last_learned, DB_PATH as LEARN_DB_PATH
 from vision_service import VisionService
+from fastapi.responses import FileResponse
+
+@app.get("/")
+def index():
+    return FileResponse("visionstock_dashboard.html")
+
+@app.get("/favicon.ico")
+def favicon():
+    return Response(status_code=204)
 
 app = FastAPI(title="Inventario Inteligente API")
 
