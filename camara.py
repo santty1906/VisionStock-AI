@@ -97,7 +97,7 @@ def main():
     if args.use_clip:
         if ClipClassifier is None:
             raise RuntimeError("No se pudo importar clip_classifier.py. Instala dependencias o revisa el archivo.")
-        clipper = ClipClassifier(device=("cuda" if args.device != "cpu" else "cpu"), labels=clip_labels)
+        clipper = ClipClassifier(device=("cpu" if args.device != "cpu" else "cpu"), labels=clip_labels)
 
     window_name = "Inventario - Deteccion"
     print("✅ Controles: [Q] salir | [ESC] salir | cerrar ventana (X) para salir")
