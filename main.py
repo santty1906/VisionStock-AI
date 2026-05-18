@@ -16,15 +16,14 @@ from learned_db import init_db as init_learn_db, get_label_counts as learned_cou
 from vision_service import VisionService
 from fastapi.responses import FileResponse
 
-@app.get("/")
-def index():
-    return FileResponse("visionstock_dashboard.html")
-
 @app.get("/favicon.ico")
 def favicon():
     return Response(status_code=204)
 
 app = FastAPI(title="Inventario Inteligente API")
+@app.get("/")
+def index():
+    return FileResponse("visionstock_dashboard.html")
 
 app.add_middleware(
     CORSMiddleware,
