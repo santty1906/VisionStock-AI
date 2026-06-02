@@ -1,0 +1,13 @@
+{
+  "name": "camara",
+  "version": "1.0.0",
+  "description": "Sistema de visión en tiempo real para inventario automático con YOLOv8 + CLIP. Toda la lógica central está en Python (FastAPI para la API, OpenCV para cámara y CLIP para reconocimiento). El frontend React no es necesario para la hackatón; esta es una mejora futura, pero la entrega se basa en los servicios y scripts de Python.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
