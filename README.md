@@ -1,31 +1,185 @@
-# 📦 VisionStock-AI, Inventario Inteligente con YOLOv8 + CLIP
+# 📦 VisionStock-AI
 
-Sistema de visión en tiempo real para inventario automático utilizando **YOLOv8 + CLIP**.
+Sistema inteligente de inventario automático en tiempo real utilizando **YOLOv8 + CLIP**.
 
-Toda la lógica central está desarrollada en **Python** usando:
+El proyecto combina:
 
-* FastAPI
-* OpenCV
-* YOLOv8
-* CLIP
-* SQLite
-
-El frontend React incluido en `/inventory-app`.
+* 🔍 Detección de objetos con YOLOv8
+* 🧠 Reconocimiento inteligente con CLIP
+* ⚡ API REST con FastAPI
+* 🖥️ Frontend React
+* 📦 Inventario automático en tiempo real
 
 ---
 
-# 🚀 Características
+# 🚀 Ejecución completa del proyecto (Frontend + Backend)
 
-* ✅ Detección de objetos en tiempo real
-* ✅ Reconocimiento inteligente con CLIP
-* ✅ Aprendizaje incremental de nuevos objetos
-* ✅ API REST con FastAPI
-* ✅ Inventario persistente en SQLite
-* ✅ Exportación CSV
-* ✅ Capturas automáticas
-* ✅ Escaneo guiado tipo FaceID
-* ✅ Soporte GPU CUDA
-* ✅ Frontend React opcional
+> Esta es la forma principal de correr el sistema completo.
+
+El proyecto funciona con:
+
+* **Backend Python** → procesamiento IA y API
+* **Frontend React** → panel visual e interfaz
+
+---
+
+# 🧩 Arquitectura general
+
+```text id="36j3al"
+React Frontend (inventory-app)
+            ↓
+        FastAPI API
+            ↓
+YOLOv8 + CLIP + OpenCV
+            ↓
+      SQLite Database
+```
+
+---
+
+# 📋 Requisitos
+
+## Backend
+
+* Python 3.9+
+* pip
+* Cámara web
+
+---
+
+## Frontend
+
+* Node.js 18+
+* npm
+
+---
+
+# ⚙️ Instalación completa
+
+# 1️⃣ Clonar repositorio
+
+```bash id="w8l6wn"
+git clone https://github.com/TU-USUARIO/VisionStock-AI.git
+cd VisionStock-AI
+```
+
+---
+
+# 2️⃣ Configurar entorno Python
+
+## Crear entorno virtual
+
+### Linux / Mac
+
+```bash id="4bghq4"
+python -m venv .venv
+source .venv/bin/activate
+```
+
+### Windows PowerShell
+
+```powershell id="g1h9me"
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+---
+
+## Instalar dependencias Python
+
+```bash id="gfl4n5"
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+---
+
+# 🖥️ Configurar Frontend React
+
+Entrar al frontend:
+
+```bash id="z8djwd"
+cd inventory-app
+```
+
+Instalar dependencias:
+
+```bash id="jlwm3v"
+npm install
+```
+
+---
+
+# ▶️ Cómo correr TODO el sistema
+
+# 🔹 Terminal 1 → Backend FastAPI
+
+Desde la raíz del proyecto:
+
+```bash id="6q7f9h"
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
+
+Backend disponible en:
+
+```text id="9m1rkp"
+http://localhost:8000
+```
+
+Swagger Docs:
+
+```text id="k7r4h0"
+http://localhost:8000/docs
+```
+
+---
+
+# 🔹 Terminal 2 → Frontend React
+
+Entrar al frontend:
+
+```bash id="t95muj"
+cd inventory-app
+```
+
+Iniciar React:
+
+```bash id="y8k2m4"
+npm start
+```
+
+Frontend disponible en:
+
+```text id="7ny0t0"
+http://localhost:3000
+```
+
+---
+
+# ✅ Flujo completo del sistema
+
+## Backend Python
+
+El backend se encarga de:
+
+* capturar frames
+* detectar objetos
+* reconocer productos
+* guardar inventario
+* generar embeddings CLIP
+* exponer endpoints REST
+
+---
+
+## Frontend React
+
+El frontend consume la API para:
+
+* visualizar inventario
+* mostrar estadísticas
+* mostrar detecciones
+* crear dashboards
+* administrar productos detectados
 
 ---
 
@@ -33,167 +187,56 @@ El frontend React incluido en `/inventory-app`.
 
 ## `vision_service.py`
 
-Servicio reutilizable que:
+Servicio principal del sistema.
 
-* recibe frames BGR
-* detecta objetos con YOLOv8
-* recorta detecciones
-* filtra por calidad y enfoque
-* reconoce usando CLIP (`Recognizer`)
-* guarda eventos en SQLite (`inventario.db`)
-* soporta aprendizaje incremental (`learn_frame`)
+Funciones:
 
----
-
-## `main.py` (FastAPI)
-
-Expone endpoints REST para:
-
-* estadísticas
-* exportación CSV
-* procesamiento de frames
+* detección YOLOv8
+* reconocimiento CLIP
+* validación de enfoque
+* guardado automático
 * aprendizaje incremental
 
-También monta automáticamente:
-
-```text
-/captures
-```
-
-para visualizar imágenes guardadas.
-
 ---
 
-## `db.py`
+## `main.py`
 
-Manejo de SQLite:
+Servidor FastAPI principal.
 
-* inserción de detecciones
+Endpoints para:
+
+* estadísticas
+* detecciones
 * exportación CSV
-* limpieza de inventario
-
----
-
-## `learned_db.py`
-
-Almacena embeddings CLIP por etiqueta y devuelve resúmenes de objetos aprendidos.
+* aprendizaje
+* procesamiento de imágenes
 
 ---
 
 ## `recognizer.py`
 
-Sistema híbrido de reconocimiento usando:
+Motor inteligente basado en:
 
 * CLIP
 * prototipos
-* fallback kNN
-
----
-
-## `clip_classifier.py`
-
-Clasificador zero-shot con CLIP utilizado desde `camara.py`.
+* kNN fallback
 
 ---
 
 ## `camara.py`
 
-Script principal de cámara en vivo:
+Script de cámara en vivo para:
 
-* detección en tiempo real
+* detección
 * inventario automático
-* capturas opcionales
 * clasificación CLIP
+* capturas
 
 ---
 
 ## `camara_learn.py`
 
-Flujo guiado estilo FaceID para:
-
-* escanear múltiples vistas
-* generar embeddings CLIP
-* habilitar reconocimiento inmediato
-
----
-
-# 📋 Requisitos
-
-* Python 3.9+
-* Cámara accesible en el sistema
-* GPU CUDA opcional (recomendada)
-
-> ⚠️ En CPU el sistema funciona más lento.
-
----
-
-# ⚙️ Instalación rápida
-
-## 1️⃣ Clonar repositorio
-
-```bash
-git clone https://github.com/TU-USUARIO/VisionStock-AI.git
-cd VisionStock-AI
-```
-
----
-
-## 2️⃣ Crear entorno virtual
-
-### Linux / Mac
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-### Windows PowerShell
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-```
-
----
-
-## 3️⃣ Instalar dependencias
-
-```bash
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
----
-
-## 4️⃣ Descargar pesos YOLOv8
-
-Colocar los pesos en la raíz del proyecto:
-
-* `yolov8m.pt`
-* `yolov8n.pt`
-* `yolov8l.pt`
-
----
-
-# ▶️ Cómo correr la API (FastAPI + CLIP + YOLO)
-
-## Iniciar servidor
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-API disponible en:
-
-```text
-http://localhost:8000
-```
-
-Swagger Docs:
-
-```text
-http://localhost:8000/docs
-```
+Modo entrenamiento tipo FaceID para aprender nuevos objetos dinámicamente.
 
 ---
 
@@ -201,20 +244,20 @@ http://localhost:8000/docs
 
 ## 📊 Estadísticas
 
-```http
+```http id="o4s8cv"
 GET /stats
 GET /counts
 ```
 
 ---
 
-## 📦 Detecciones paginadas
+## 📦 Detecciones
 
-```http
+```http id="nvjlwm"
 GET /detections?page=1&page_size=25
 ```
 
-Filtros disponibles:
+Filtros:
 
 * `label`
 * `last_minutes`
@@ -223,7 +266,7 @@ Filtros disponibles:
 
 ## 📁 Exportar CSV
 
-```http
+```http id="ngwh92"
 GET /export.csv
 ```
 
@@ -231,160 +274,57 @@ GET /export.csv
 
 ## 🖼️ Procesar frame
 
-```http
+```http id="83ib4r"
 POST /vision/frame
 ```
 
-Procesa:
-
-* detección YOLO
-* validación de enfoque
-* reconocimiento CLIP
-* guardado automático
-
 ---
 
-## 🧠 Aprendizaje incremental
+## 🧠 Aprender nuevos objetos
 
-```http
+```http id="1lj1aa"
 POST /learn/frame?label=OBJETO
 ```
-
-Guarda embeddings CLIP y recarga el reconocedor automáticamente.
-
----
-
-## 📚 Objetos aprendidos
-
-```http
-GET /learned/summary
-```
-
----
-
-## 🧹 Limpiar inventario
-
-```http
-POST /inventory/clear
-```
-
-Header requerido:
-
-```text
-X-Token
-```
-
-Variable de entorno:
-
-```bash
-INVENTORY_TOKEN
-```
-
-Valor por defecto:
-
-```text
-1234
-```
-
----
-
-# 📸 Capturas automáticas
-
-Las imágenes se guardan en:
-
-```text
-/captures
-```
-
-y FastAPI las expone automáticamente.
 
 ---
 
 # 🎥 Scripts de cámara
 
-# 🔍 Detección + inventario (`camara.py`)
+# Detección en vivo
 
-## Modo básico
-
-```bash
+```bash id="f9s4b0"
 python camara.py --show
 ```
 
 ---
 
-## Mayor precisión
+# Mayor precisión
 
-```bash
-python camara.py --model yolov8l.pt --conf 0.5 --imgsz 1280 --device cuda --save-captures
+```bash id="jlwmdu"
+python camara.py --model yolov8l.pt --conf 0.5 --imgsz 1280 --device cuda
 ```
 
 ---
 
-## CLIP zero-shot
+# CLIP zero-shot
 
-```bash
-python camara.py --use-clip --clip-labels "celular,lentes,mouse,caja_audifonos"
+```bash id="zk7wr7"
+python camara.py --use-clip --clip-labels "mouse,celular,lentes"
 ```
 
 ---
 
-## Controles
+# 🧠 Escaneo guiado
 
-* `Q` o `ESC` → salir
-* cooldown por etiqueta
-* filtrado de áreas pequeñas
-* bloqueo de personas por defecto
-
----
-
-# 🧠 Escaneo guiado tipo FaceID (`camara_learn.py`)
-
-```bash
+```bash id="qrmn3y"
 python camara_learn.py
 ```
 
-## Controles
+Controles:
 
-* `S` → iniciar escaneo guiado
-* `P` → alternar ignorar personas
-* `Q` o `ESC` → salir
-
-El sistema captura automáticamente:
-
-* center
-* left
-* right
-* up
-* down
-* near
-* far
-* tilt
-
-Luego genera embeddings CLIP automáticamente.
-
----
-
-# ⚡ Consideraciones de rendimiento
-
-## 🎯 Mejor precisión
-
-* usar `yolov8l.pt`
-* aumentar `--imgsz`
-* aumentar `--conf`
-
----
-
-## 🚀 Mayor velocidad
-
-* usar `yolov8n.pt`
-* reducir `--imgsz`
-* usar GPU CUDA
-
----
-
-## 🔎 Calidad de enfoque
-
-`VisionService` y `camara_learn.py` utilizan Laplacian para validar nitidez antes de guardar detecciones.
+* `S` → iniciar escaneo
+* `P` → ignorar personas
+* `Q` → salir
 
 ---
 
@@ -392,10 +332,9 @@ Luego genera embeddings CLIP automáticamente.
 
 ## `inventario.db`
 
-Guarda:
+Almacena:
 
 * timestamps
-* cámara
 * labels
 * confianza
 * bounding boxes
@@ -409,70 +348,36 @@ Guarda embeddings CLIP para reconocimiento incremental.
 
 ---
 
-# 🖥️ Frontend React 
+# ⚡ Rendimiento
 
-Existe un frontend React dentro de:
+## Mejor precisión
 
-```text
-/inventory-app
-```
-
-El frontend puede utilizarse como:
-
-* panel administrativo
-* dashboard
-* visualizador de inventario
-* interfaz futura del sistema
-
-## Ejecutarlo
-
-```bash
-cd inventory-app
-npm install
-npm start
-```
-
-Disponible en:
-
-```text
-http://localhost:3000
-```
+* usar `yolov8l.pt`
+* aumentar `--imgsz`
+* aumentar `--conf`
 
 ---
 
-# 🔄 Cómo correr la aplicación completa
+## Mayor velocidad
 
-## Terminal 1 → Backend Python
-
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
+* usar `yolov8n.pt`
+* usar GPU CUDA
+* reducir `--imgsz`
 
 ---
 
-## Terminal 2 → Frontend React
+# 🔮 Mejoras futuras
 
-```bash
-cd inventory-app
-npm start
-```
-
----
-
-# 🛣️ Próximos pasos / mejoras opcionales
-
-* Integrar completamente el frontend React
-* Dashboard en tiempo real
+* Dashboard React avanzado
 * Autenticación JWT
-* Tokens por cámara
-* Docker + soporte GPU
-* Health checks
-* Base de datos más robusta
-* Mejoras en precisión y reconocimiento
+* Docker + GPU
+* Streaming RTSP
+* Base de datos robusta
 * Entrenamiento automático continuo
+* Mejor precisión de reconocimiento
 
 ---
 
 # 👨‍💻 Autor
 
-Proyecto desarrollado para hackatón de visión computacional e inventario inteligente.
+Proyecto desarrollado para hackatón de Samsung Innovations Campus.
