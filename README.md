@@ -1,31 +1,31 @@
 # 📦 VisionStock-AI
 
-Sistema inteligente de inventario automático en tiempo real utilizando **YOLOv8 + CLIP**.
+Real-time intelligent inventory system powered by **YOLOv8 + CLIP**.
 
-El proyecto combina:
+The project combines:
 
-* 🔍 Detección de objetos con YOLOv8
-* 🧠 Reconocimiento inteligente con CLIP
-* ⚡ API REST con FastAPI
-* 🖥️ Frontend React
-* 📦 Inventario automático en tiempo real
-
----
-
-# 🚀 Ejecución completa del proyecto (Frontend + Backend)
-
-> Esta es la forma principal de correr el sistema completo.
-
-El proyecto funciona con:
-
-* **Backend Python** → procesamiento IA y API
-* **Frontend React** → panel visual e interfaz
+* 🔍 Object detection using YOLOv8
+* 🧠 Intelligent recognition with CLIP
+* ⚡ REST API with FastAPI
+* 🖥️ React Frontend
+* 📦 Automatic real-time inventory management
 
 ---
 
-# 🧩 Arquitectura general
+# 🚀 Running the Full Project (Frontend + Backend)
 
-```text id="36j3al"
+> This is the main way to run the complete system.
+
+The project consists of:
+
+* **Python Backend** → AI processing and API
+* **React Frontend** → visual dashboard and interface
+
+---
+
+# 🧩 General Architecture
+
+```text
 React Frontend (inventory-app)
             ↓
         FastAPI API
@@ -37,13 +37,13 @@ YOLOv8 + CLIP + OpenCV
 
 ---
 
-# 📋 Requisitos
+# 📋 Requirements
 
 ## Backend
 
 * Python 3.9+
 * pip
-* Cámara web
+* Webcam / Camera device
 
 ---
 
@@ -54,330 +54,330 @@ YOLOv8 + CLIP + OpenCV
 
 ---
 
-# ⚙️ Instalación completa
+# ⚙️ Full Installation
 
-# 1️⃣ Clonar repositorio
+# 1️⃣ Clone the Repository
 
-```bash id="w8l6wn"
-git clone https://github.com/TU-USUARIO/VisionStock-AI.git
+```bash
+git clone https://github.com/YOUR-USERNAME/VisionStock-AI.git
 cd VisionStock-AI
 ```
 
 ---
 
-# 2️⃣ Configurar entorno Python
+# 2️⃣ Configure Python Environment
 
-## Crear entorno virtual
+## Create Virtual Environment
 
 ### Linux / Mac
 
-```bash id="4bghq4"
+```bash
 python -m venv .venv
 source .venv/bin/activate
 ```
 
 ### Windows PowerShell
 
-```powershell id="g1h9me"
+```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 ```
 
 ---
 
-## Instalar dependencias Python
+## Install Python Dependencies
 
-```bash id="gfl4n5"
+```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
 ---
 
-# 🖥️ Configurar Frontend React
+# 🖥️ Configure React Frontend
 
-Entrar al frontend:
+Go to the frontend folder:
 
-```bash id="z8djwd"
+```bash
 cd inventory-app
 ```
 
-Instalar dependencias:
+Install dependencies:
 
-```bash id="jlwm3v"
+```bash
 npm install
 ```
 
 ---
 
-# ▶️ Cómo correr TODO el sistema
+# ▶️ Run the Complete System
 
-# 🔹 Terminal 1 → Backend FastAPI
+# 🔹 Terminal 1 → FastAPI Backend
 
-Desde la raíz del proyecto:
+From the project root:
 
-```bash id="6q7f9h"
+```bash
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-Backend disponible en:
+Backend available at:
 
-```text id="9m1rkp"
+```text
 http://localhost:8000
 ```
 
-Swagger Docs:
+Swagger Documentation:
 
-```text id="k7r4h0"
+```text
 http://localhost:8000/docs
 ```
 
 ---
 
-# 🔹 Terminal 2 → Frontend React
+# 🔹 Terminal 2 → React Frontend
 
-Entrar al frontend:
+Go to the frontend folder:
 
-```bash id="t95muj"
+```bash
 cd inventory-app
 ```
 
-Iniciar React:
+Start React:
 
-```bash id="y8k2m4"
+```bash
 npm start
 ```
 
-Frontend disponible en:
+Frontend available at:
 
-```text id="7ny0t0"
+```text
 http://localhost:3000
 ```
 
 ---
 
-# ✅ Flujo completo del sistema
+# ✅ Complete System Workflow
 
-## Backend Python
+## Python Backend
 
-El backend se encarga de:
+The backend handles:
 
-* capturar frames
-* detectar objetos
-* reconocer productos
-* guardar inventario
-* generar embeddings CLIP
-* exponer endpoints REST
-
----
-
-## Frontend React
-
-El frontend consume la API para:
-
-* visualizar inventario
-* mostrar estadísticas
-* mostrar detecciones
-* crear dashboards
-* administrar productos detectados
+* frame capture
+* object detection
+* product recognition
+* inventory storage
+* CLIP embedding generation
+* REST API endpoints
 
 ---
 
-# 🧠 Arquitectura Python
+## React Frontend
+
+The frontend consumes the API to:
+
+* visualize inventory
+* display statistics
+* show detections
+* build dashboards
+* manage detected products
+
+---
+
+# 🧠 Python Architecture
 
 ## `vision_service.py`
 
-Servicio principal del sistema.
+Main system service.
 
-Funciones:
+Features:
 
-* detección YOLOv8
-* reconocimiento CLIP
-* validación de enfoque
-* guardado automático
-* aprendizaje incremental
+* YOLOv8 detection
+* CLIP recognition
+* focus validation
+* automatic storage
+* incremental learning
 
 ---
 
 ## `main.py`
 
-Servidor FastAPI principal.
+Main FastAPI server.
 
-Endpoints para:
+Endpoints for:
 
-* estadísticas
-* detecciones
-* exportación CSV
-* aprendizaje
-* procesamiento de imágenes
+* statistics
+* detections
+* CSV export
+* learning
+* image processing
 
 ---
 
 ## `recognizer.py`
 
-Motor inteligente basado en:
+Intelligent recognition engine based on:
 
 * CLIP
-* prototipos
+* prototypes
 * kNN fallback
 
 ---
 
 ## `camara.py`
 
-Script de cámara en vivo para:
+Live camera script for:
 
-* detección
-* inventario automático
-* clasificación CLIP
-* capturas
+* detection
+* automatic inventory
+* CLIP classification
+* image captures
 
 ---
 
 ## `camara_learn.py`
 
-Modo entrenamiento tipo FaceID para aprender nuevos objetos dinámicamente.
+FaceID-style training mode to dynamically learn new objects.
 
 ---
 
-# 🌐 Endpoints principales
+# 🌐 Main Endpoints
 
-## 📊 Estadísticas
+## 📊 Statistics
 
-```http id="o4s8cv"
+```http
 GET /stats
 GET /counts
 ```
 
 ---
 
-## 📦 Detecciones
+## 📦 Detections
 
-```http id="nvjlwm"
+```http
 GET /detections?page=1&page_size=25
 ```
 
-Filtros:
+Filters:
 
 * `label`
 * `last_minutes`
 
 ---
 
-## 📁 Exportar CSV
+## 📁 Export CSV
 
-```http id="ngwh92"
+```http
 GET /export.csv
 ```
 
 ---
 
-## 🖼️ Procesar frame
+## 🖼️ Process Frame
 
-```http id="83ib4r"
+```http
 POST /vision/frame
 ```
 
 ---
 
-## 🧠 Aprender nuevos objetos
+## 🧠 Learn New Objects
 
-```http id="1lj1aa"
-POST /learn/frame?label=OBJETO
+```http
+POST /learn/frame?label=OBJECT
 ```
 
 ---
 
-# 🎥 Scripts de cámara
+# 🎥 Camera Scripts
 
-# Detección en vivo
+# Live Detection
 
-```bash id="f9s4b0"
+```bash
 python camara.py --show
 ```
 
 ---
 
-# Mayor precisión
+# Higher Accuracy
 
-```bash id="jlwmdu"
+```bash
 python camara.py --model yolov8l.pt --conf 0.5 --imgsz 1280 --device cuda
 ```
 
 ---
 
-# CLIP zero-shot
+# CLIP Zero-Shot
 
-```bash id="zk7wr7"
-python camara.py --use-clip --clip-labels "mouse,celular,lentes"
+```bash
+python camara.py --use-clip --clip-labels "mouse,phone,glasses"
 ```
 
 ---
 
-# 🧠 Escaneo guiado
+# 🧠 Guided Scanning
 
-```bash id="qrmn3y"
+```bash
 python camara_learn.py
 ```
 
-Controles:
+Controls:
 
-* `S` → iniciar escaneo
-* `P` → ignorar personas
-* `Q` → salir
+* `S` → start scanning
+* `P` → ignore people
+* `Q` → quit
 
 ---
 
-# 🗄️ Bases de datos
+# 🗄️ Databases
 
 ## `inventario.db`
 
-Almacena:
+Stores:
 
 * timestamps
 * labels
-* confianza
+* confidence
 * bounding boxes
-* capturas
+* captures
 
 ---
 
 ## `learned_objects.db`
 
-Guarda embeddings CLIP para reconocimiento incremental.
+Stores CLIP embeddings for incremental recognition.
 
 ---
 
-# ⚡ Rendimiento
+# ⚡ Performance
 
-## Mejor precisión
+## Better Accuracy
 
-* usar `yolov8l.pt`
-* aumentar `--imgsz`
-* aumentar `--conf`
-
----
-
-## Mayor velocidad
-
-* usar `yolov8n.pt`
-* usar GPU CUDA
-* reducir `--imgsz`
+* use `yolov8l.pt`
+* increase `--imgsz`
+* increase `--conf`
 
 ---
 
-# 🔮 Mejoras futuras
+## Faster Performance
 
-* Dashboard React avanzado
-* Autenticación JWT
-* Docker + GPU
-* Streaming RTSP
-* Base de datos robusta
-* Entrenamiento automático continuo
-* Mejor precisión de reconocimiento
+* use `yolov8n.pt`
+* use CUDA GPU
+* reduce `--imgsz`
 
 ---
 
-# 👨‍💻 Autor
+# 🔮 Future Improvements
 
-Proyecto desarrollado para hackatón de Samsung Innovations Campus.
+* Advanced React dashboard
+* JWT authentication
+* Docker + GPU support
+* RTSP streaming
+* More robust database
+* Continuous training pipeline
+* Improved recognition accuracy
+
+---
+
+# 👨‍💻 Author
+
+Project developed for the Samsung Innovation Campus Hackathon.
